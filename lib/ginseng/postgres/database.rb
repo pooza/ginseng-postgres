@@ -12,8 +12,8 @@ module Ginseng
         @config = config_class.constantize.instance
         dsn = Database.dsn
         dsn.dbname ||= default_dbname
-        raise Ginseng::DatabaseError, "Invalid DSN '#{dsn}'" unless dsn.absolute?
-        raise Ginseng::DatabaseError, "Invalid scheme '#{dsn.scheme}'" unless dsn.scheme == 'postgres'
+        raise Ginseng::DatabaseError, 'Invalid DSN' unless dsn.absolute?
+        raise Ginseng::DatabaseError, 'Invalid scheme' unless dsn.scheme == 'postgres'
         @db = PG.connect(dsn.to_h)
       rescue PG::Error => e
         raise Ginseng::DatabaseError, e.message
