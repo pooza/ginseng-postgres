@@ -10,7 +10,7 @@ module Ginseng
 
       def initialize
         @config = config_class.constantize.instance
-        dsn = Database.dsn
+        dsn = database_class.constantize.dsn
         dsn.dbname ||= default_dbname
         raise Ginseng::DatabaseError, 'Invalid DSN' unless dsn.absolute?
         raise Ginseng::DatabaseError, 'Invalid scheme' unless dsn.scheme == 'postgres'
