@@ -7,8 +7,10 @@ module Ginseng
   module Postgres
     extend ActiveSupport::Autoload
 
+    autoload :Config
     autoload :Database
     autoload :DSN
     autoload :Environment
+    autoload :Package
   end
 end
