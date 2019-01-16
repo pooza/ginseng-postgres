@@ -13,6 +13,10 @@ module Ginseng
         return 'Ginseng::Postgres::Config'
       end
 
+      def database_class
+        return 'Ginseng::Postgres::Database'
+      end
+
       def self.name
         return 'ginseng-postgres'
       end
