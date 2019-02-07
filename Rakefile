@@ -7,10 +7,12 @@ require 'bundler/setup'
 require 'ginseng'
 require 'ginseng/postgres'
 
+environment = Ginseng::Postgres::Environment
+
 desc 'test'
 task :test do
   require 'test/unit'
-  Dir.glob(File.join(Ginseng::Postgres::Environment.dir, 'test/*')).each do |t|
+  Dir.glob(File.join(environment.dir, 'test/*')).each do |t|
     require t
   end
 end
