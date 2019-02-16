@@ -6,7 +6,7 @@ module Ginseng
       end
 
       def test_new
-        assert_true(@dsn.is_a?(DSN))
+        assert(@dsn.is_a?(DSN))
       end
 
       def test_scheme
