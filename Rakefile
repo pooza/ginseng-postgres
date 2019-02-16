@@ -5,6 +5,7 @@ ENV['SSL_CERT_FILE'] ||= File.join(dir, 'cert/cacert.pem')
 ENV['RAKE_MODULE'] = 'Ginseng::Postgres'
 
 require 'bundler/setup'
+require 'ginseng'
 require 'ginseng/postgres'
 
 desc 'test all'
