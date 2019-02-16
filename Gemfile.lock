@@ -1,23 +1,26 @@
 GIT
   remote: https://github.com/pooza/ginseng-core.git
-  revision: daf4d443676e0d0406a1a69d25562bd9b0874dc9
+  revision: 902f9fa0351161ee676f01edbd1c9290cdac257f
   specs:
-    ginseng-core (1.0.17)
+    ginseng-core (1.1.0)
       activesupport
       addressable
       bundler (< 2.0)
+      daemon-spawn
       httparty
+      rack-test
       rake
       rest-client
       rubocop
       sinatra
       syslog-logger
       test-unit
+      thin
 
 PATH
   remote: .
   specs:
-    ginseng-postgres (1.0.4)
+    ginseng-postgres (1.0.5)
       pg
 
 GEM
@@ -32,8 +35,11 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     ast (2.4.0)
     concurrent-ruby (1.1.4)
+    daemon-spawn (0.4.2)
+    daemons (1.3.1)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
+    eventmachine (1.2.7)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     httparty (0.16.4)
@@ -59,13 +65,15 @@ GEM
     rack (2.0.6)
     rack-protection (2.0.5)
       rack
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
     rainbow (3.0.0)
     rake (12.3.2)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rubocop (0.63.1)
+    rubocop (0.64.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
@@ -82,6 +90,10 @@ GEM
     syslog-logger (1.6.8)
     test-unit (3.3.0)
       power_assert
+    thin (1.7.2)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0, >= 1.0.4)
+      rack (>= 1, < 3)
     thread_safe (0.3.6)
     tilt (2.0.9)
     tzinfo (1.2.5)

@@ -17,7 +17,7 @@ module Ginseng
       end
 
       def test_execute
-        assert_true(@db.execute('tables', {schema: 'information_schema'}).present?)
+        assert(@db.execute('tables', {schema: 'information_schema'}).present?)
       end
     end
   end
