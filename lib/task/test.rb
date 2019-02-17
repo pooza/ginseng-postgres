@@ -1,6 +1,5 @@
 namespace :ginseng do
   namespace :postgres do
-    desc 'ginseng-postgres test'
     task :test do
       ENV['TEST'] = Ginseng::Postgres::Package.name
       require 'test/unit'

@@ -11,9 +11,8 @@ require 'ginseng/postgres'
 desc 'test all'
 task test: ['ginseng:postgres:test']
 
-Dir.glob(File.join(Ginseng::Environment.dir, 'lib/task/*.rb')).each do |f|
-  require f
-end
-Dir.glob(File.join(Ginseng::Postgres::Environment.dir, 'lib/task/*.rb')).each do |f|
-  require f
+['Ginseng', 'Ginseng::Postgres'].each do |prefix|
+  Dir.glob(File.join("#{prefix}::Environment".constantize.dir, 'lib/task/*.rb')).each do |f|
+    require f
+  end
 end
