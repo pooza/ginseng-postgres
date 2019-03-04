@@ -27,7 +27,7 @@ module Ginseng
       private
 
       def db
-        return Database.instance
+        return database_class.constantize.instance
       end
 
       def dir
