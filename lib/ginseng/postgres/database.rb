@@ -28,11 +28,9 @@ module Ginseng
       end
 
       def create_sql(name, params = {})
-        params.each do |k, v|
-          params[k] = escape_string(v) if v.is_a?(String)
-        end
-        path = File.join(environment_class.constantize.dir, 'query', "#{name}.sql.erb")
-        return ERB.new(File.read(path), nil, '-').result(binding).gsub(/\s+/, ' ').strip
+        template = query_template_class.constantize.new(name)
+        template.params = params
+        return template.to_s
       end
 
       def execute(name, params = {})

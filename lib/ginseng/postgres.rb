@@ -12,5 +12,6 @@ module Ginseng
     autoload :DSN
     autoload :Environment
     autoload :Package
+    autoload :QueryTemplate
   end
 end

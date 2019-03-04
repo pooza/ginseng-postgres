@@ -17,6 +17,10 @@ module Ginseng
         return 'Ginseng::Postgres::Database'
       end
 
+      def query_template_class
+        return 'Ginseng::Postgres::QueryTemplate'
+      end
+
       def self.name
         return 'ginseng-postgres'
       end
