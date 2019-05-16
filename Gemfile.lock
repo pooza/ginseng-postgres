@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pooza/ginseng-core.git
-  revision: 4d3130d26c49ed87d5944bb97961daeb68690867
+  revision: a8a01029b8236a91ccc346b9c8403183469a0492
   specs:
     ginseng-core (1.3.2)
       activesupport
