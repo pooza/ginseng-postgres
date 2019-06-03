@@ -3,9 +3,6 @@ module Ginseng
     class DatabaseTest < Test::Unit::TestCase
       def setup
         @config = Config.instance
-        if ENV['CI'].present?
-          @config['/postgres/dsn'] ||= 'postgres://root@localhost:5432/circle-test_test'
-        end
         @db = Database.instance
       end
 
