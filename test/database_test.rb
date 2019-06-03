@@ -2,7 +2,6 @@ module Ginseng
   module Postgres
     class DatabaseTest < Test::Unit::TestCase
       def setup
-        @config = Config.instance
         @db = Database.instance
       end
 
