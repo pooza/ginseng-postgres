@@ -7,5 +7,3 @@ package:
     - tkoishi@b-shock.co.jp
   description: ginseng PostgreSQL libraries
   license: MIT
-postgres:
-  dsn: postgres://postgres@localhost:5432/test
