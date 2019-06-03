@@ -6,10 +6,10 @@ Gem::Specification.new do |spec|
   spec.version = package['version']
   spec.authors = package['authors']
   spec.email = package['email']
-  spec.summary = 'ginseng PostgreSQL libraries'
-  spec.description = 'ginseng PostgreSQL libraries'
+  spec.summary = package['description']
+  spec.description = package['description']
   spec.homepage = package['url']
-  spec.license = 'MIT'
+  spec.license = package['license']
   spec.metadata['homepage_uri'] = package['url']
   spec.require_paths = ['lib']
 
