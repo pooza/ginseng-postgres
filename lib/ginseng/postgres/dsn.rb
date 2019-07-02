@@ -1,8 +1,6 @@
-require 'addressable/uri'
-
 module Ginseng
   module Postgres
-    class DSN < Addressable::URI
+    class DSN < Ginseng::URI
       def dbname
         return path.sub(%r{^/}, '')
       end
