@@ -19,7 +19,7 @@ GIT
 PATH
   remote: .
   specs:
-    ginseng-postgres (1.1.5)
+    ginseng-postgres (1.1.6)
       pg
 
 GEM
