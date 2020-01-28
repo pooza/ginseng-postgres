@@ -4,7 +4,7 @@ module Ginseng
       include Package
 
       def initialize(name)
-        name += '.sql' unless name =~ /\.sql$/
+        name += '.sql' unless /\.sql$/.match?(name)
         super(name)
       end
 

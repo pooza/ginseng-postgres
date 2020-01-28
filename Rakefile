@@ -6,6 +6,6 @@ require 'bundler/setup'
 require 'ginseng'
 require 'ginseng/postgres'
 
-Dir.glob(File.join(Ginseng::Postgres::Environment.dir, 'lib/task/*.rb')).each do |f|
+Dir.glob(File.join(Ginseng::Postgres::Environment.dir, 'lib/task/*.rb')).sort.each do |f|
   require f
 end
