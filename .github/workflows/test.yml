@@ -6,11 +6,11 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container:
-      image: ruby:2.7
+    #container:
+    #  image: ruby:2.7
     services:
       postgres:
-        image: postgres:10
+        image: postgres:11
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -20,6 +20,10 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v2
+      - name: setup Ruby 2.7
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7.x
       - name: apt install
         run: |
           sudo apt install libpq-dev
