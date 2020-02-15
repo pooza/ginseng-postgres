@@ -6,15 +6,13 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
-    #container:
-    #  image: ruby:2.7
     services:
       postgres:
         image: postgres:11
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_PASSWORD: ''
+          POSTGRES_DB: test
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -37,10 +35,5 @@ jobs:
         run: |
           bundle exec rubocop
       - name: Run test
-        env:
-          POSTGRES_HOST: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
-          POSTGRES_PORT: 5432
         run: |
           bundle exec rake test
