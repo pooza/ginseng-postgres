@@ -13,8 +13,7 @@ module Ginseng
       def initialize
         @config = config_class.instance
         dsn = database_class.dsn
-        raise Ginseng::DatabaseError, 'Invalid DSN' unless dsn.absolute?
-        raise Ginseng::DatabaseError, 'Invalid scheme' unless dsn.scheme == 'postgres'
+        raise Ginseng::DatabaseError, 'Invalid DSN' unless dsn.valid?
         @connection = Sequel.connect(dsn.to_s)
       rescue => e
         raise Ginseng::DatabaseError, e.message, e.backtrace
@@ -31,13 +30,25 @@ module Ginseng
       end
 
       def execute(name, params = {})
-        return @connection.fetch(create_sql(name, params)).all
+        return @connection.fetch(create_sql(name, params)).all.map(&:with_indifferent_access)
       rescue => e
         raise Ginseng::DatabaseError, e.message, e.backtrace
       end
 
+      alias exec execute
+
       def self.dsn
         return DSN.parse(Config.instance['/postgres/dsn'])
+      rescue Ginseng::ConfigError
+        return nil
+      end
+
+      def self.connect
+        return instance
+      end
+
+      def self.config?
+        return dsn.present?
       end
     end
   end

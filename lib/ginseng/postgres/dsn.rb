@@ -5,6 +5,10 @@ module Ginseng
         return path.sub(%r{^/}, '')
       end
 
+      def valid?
+        return absolute? && scheme == 'postgres'
+      end
+
       def to_h
         return {
           host: host,
