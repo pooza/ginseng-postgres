@@ -23,7 +23,7 @@ Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 
 Layout/SpaceBeforeBlockBraces:
-  EnforcedStyle: no_space
+  EnforcedStyle: space
 
 Layout/SpaceInsideBlockBraces:
   EnforcedStyle: no_space
@@ -50,16 +50,6 @@ Metrics/ClassLength:
   Max: 200
   Exclude:
     - test/*
-
-Naming/FileName:
-  Exclude:
-    - Rakefile.rb
-    - '**/Rakefile*.rb'
-
-Metrics/BlockLength:
-  Exclude:
-    - Rakefile.rb
-    - '**/Rakefile*.rb'
 
 Style/Documentation:
   Enabled: false
@@ -89,8 +79,12 @@ Style/IdenticalConditionalBranches:
   Exclude:
     - test/*
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 100
+  Exclude:
+    - test/*
+
+Style/IfUnlessModifier:
   Exclude:
     - test/*
 
@@ -135,3 +129,6 @@ Metrics/CyclomaticComplexity:
 
 Metrics/PerceivedComplexity:
   Max: 10
+
+Naming/RescuedExceptionsVariableName:
+  PreferredName: e
