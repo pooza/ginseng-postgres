@@ -6,6 +6,12 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
+    container: ${{ matrix.ruby }}
+    strategy:
+      matrix:
+        ruby:
+          - ruby:2.6
+          - ruby:2.7
     services:
       postgres:
         image: postgres:11
@@ -18,12 +24,9 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v2
-      - name: setup Ruby 2.7
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.7.x
       - name: apt install
         run: |
+          sudo apt update
           sudo apt install libpq-dev
       - name: bundle install
         run: |
