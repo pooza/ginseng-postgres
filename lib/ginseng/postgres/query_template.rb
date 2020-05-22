@@ -4,20 +4,20 @@ module Ginseng
       include Package
 
       def initialize(name)
-        name += '.sql' unless /\.sql$/.match?(name)
-        super(name)
+        name += '.sql' unless name.end_with?('.sql')
+        super
       end
 
       def params=(params)
         params.each do |k, v|
           params[k] = db.escape_string(v) if v.is_a?(String)
         end
-        super(params)
+        super
       end
 
       def []=(key, value)
         value = db.escape_string(value) if value.is_a?(String)
-        super(key, value)
+        super
       end
 
       def to_s
