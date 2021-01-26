@@ -1,14 +1,24 @@
-require: rubocop-performance
+require:
+  - rubocop-performance
 
 AllCops:
   AllowSymlinksInCacheRootDirectory: true
   DisplayCopNames: true
+  NewCops: enable
+  Include:
+    - '**/*.rb'
+    - '**/Rakefile'
+    - '**/config.ru'
   Exclude:
     - '**/._*'
-    - '.git/**/*'
+    - '**/.git/**/*'
     - 'public/**/*'
+    - 'config/**/*'
     - 'tmp/**/*'
   TargetRubyVersion: 2.6
+
+Naming/RescuedExceptionsVariableName:
+  PreferredName: e
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -18,47 +28,6 @@ Style/DoubleNegation:
 
 Style/FormatStringToken:
   EnforcedStyle: template
-
-Layout/ParameterAlignment:
-  EnforcedStyle: with_fixed_indentation
-
-Layout/FirstHashElementIndentation:
-  EnforcedStyle: consistent
-
-Layout/FirstArrayElementIndentation:
-  EnforcedStyle: consistent
-
-Layout/SpaceBeforeBlockBraces:
-  EnforcedStyle: space
-
-Layout/SpaceInsideBlockBraces:
-  EnforcedStyle: no_space
-  EnforcedStyleForEmptyBraces: no_space
-  SpaceBeforeBlockParameters: false
-
-Layout/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
-
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-
-Layout/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
-
-Metrics/AbcSize:
-  Max: 30
-  Exclude:
-    - test/*
-
-Metrics/MethodLength:
-  Max: 20
-  Exclude:
-    - test/*
-
-Metrics/ClassLength:
-  Max: 200
-  Exclude:
-    - test/*
 
 Style/Documentation:
   Enabled: false
@@ -86,16 +55,11 @@ Style/WordArray:
 
 Style/IdenticalConditionalBranches:
   Exclude:
-    - test/*
-
-Layout/LineLength:
-  Max: 100
-  Exclude:
-    - test/*
+    - 'test/*'
 
 Style/IfUnlessModifier:
   Exclude:
-    - test/*
+    - 'test/*'
 
 Style/AsciiComments:
   Enabled: false
@@ -104,15 +68,6 @@ Style/FormatString:
   EnforcedStyle: percent
 
 Style/ConditionalAssignment:
-  Enabled: false
-
-Lint/AssignmentInCondition:
-  Enabled: false
-
-Lint/UnusedBlockArgument:
-  Enabled: false
-
-Lint/UnusedMethodArgument:
   Enabled: false
 
 Style/YodaCondition:
@@ -133,14 +88,167 @@ Style/HashEachMethods:
 Style/HashTransformKeys:
   Enabled: true
 
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+
+Style/RedundantFetchBlock:
+  Enabled: true
+
+Style/AccessorGrouping:
+  Enabled: true
+
+Style/BisectedAttrAccessor:
+  Enabled: true
+
+Style/RedundantAssignment:
+  Enabled: true
+
+Style/ArrayCoercion:
+  Enabled: true
+
+Style/CaseLikeIf:
+  Enabled: true
+
+Style/HashAsLastArrayItem:
+  Enabled: true
+
+Style/HashLikeCase:
+  Enabled: true
+
+Style/RedundantFileExtensionInRequire:
+  Enabled: true
+
+Style/ExplicitBlockArgument:
+  Enabled: true
+
+Style/GlobalStdStream:
+  Enabled: true
+
+Style/OptionalBooleanParameter:
+  Enabled: true
+
+Style/SingleArgumentDig:
+  Enabled: true
+
+Style/StringConcatenation:
+  Enabled: true
+
+Style/CombinableLoops: # (new in 0.90)
+  Enabled: true
+
+Style/KeywordParametersOrder: # (new in 0.90)
+  Enabled: true
+
+Style/RedundantSelfAssignment: # (new in 0.90)
+  Enabled: true
+
+Style/SoleNestedConditional: # (new in 0.89)
+  Enabled: true
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstArgumentIndentation:
+  EnforcedStyle: consistent
+
+Layout/SpaceBeforeBlockBraces:
+  EnforcedStyle: space
+
+Layout/SpaceInsideBlockBraces:
+  EnforcedStyle: no_space
+  EnforcedStyleForEmptyBraces: no_space
+  SpaceBeforeBlockParameters: false
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Layout/LineLength:
+  Max: 100
+  Exclude:
+    - 'test/*'
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
+Metrics/AbcSize:
+  Max: 30
+  Exclude:
+    - 'test/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'test/*'
+    - '**/contract/*'
+    - '**/controller/*'
+    - 'app/task/*'
+    - '*.gemspec'
+
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - 'test/*'
+
+Metrics/ClassLength:
+  Max: 200
+  Exclude:
+    - 'test/*'
+    - '**/contract/*'
+    - '**/controller/*'
+
+Metrics/ModuleLength:
+  Max: 200
+  Exclude:
+    - 'test/*'
+    - '**/contract/*'
+    - '**/controller/*'
+
 Metrics/CyclomaticComplexity:
   Max: 10
+  Exclude:
+    - 'test/*'
+    - '**/contract/*'
 
 Metrics/PerceivedComplexity:
   Max: 10
+  Exclude:
+    - 'test/*'
+    - '**/contract/*'
 
-Naming/RescuedExceptionsVariableName:
-  PreferredName: e
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Lint/UnusedBlockArgument:
+  Enabled: false
+
+Lint/UnusedMethodArgument:
+  Enabled: false
 
 Lint/RaiseException:
   Enabled: true
@@ -148,18 +256,77 @@ Lint/RaiseException:
 Lint/StructNewOverride:
   Enabled: true
 
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
-
-Style/ExponentialNotation:
-  Enabled: true
-
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
-
-Style/SlicingWithRange:
+Lint/DuplicateElsifCondition:
   Enabled: true
 
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
 
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: true
+
+Lint/DuplicateRescueException:
+  Enabled: true
+
+Lint/EmptyConditionalBody:
+  Enabled: true
+
+Lint/FloatComparison:
+  Enabled: true
+
+Lint/MissingSuper:
+  Enabled: true
+
+Lint/OutOfRangeRegexpRef:
+  Enabled: true
+
+Lint/SelfAssignment:
+  Enabled: true
+
+Lint/TopLevelReturnWithArgument:
+  Enabled: true
+
+Lint/UnreachableLoop:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Lint/DuplicateRequire: # (new in 0.90)
+  Enabled: true
+
+Lint/EmptyFile: # (new in 0.90)
+  Enabled: true
+
+Lint/TrailingCommaInAttributeDeclaration: # (new in 0.90)
+  Enabled: true
+
+Lint/UselessMethodDefinition: # (new in 0.90)
+  Enabled: true
+
+Performance/AncestorsInclude:
+  Enabled: true
+
+Performance/BigDecimalWithNumericArgument:
+  Enabled: true
+
+Performance/RedundantSortBlock:
+  Enabled: true
+
+Performance/RedundantStringChars:
+  Enabled: true
+
+Performance/ReverseFirst:
+  Enabled: true
+
+Performance/SortReverse:
+  Enabled: true
+
+Performance/Squeeze:
+  Enabled: true
+
+Performance/StringInclude:
+  Enabled: true
+
+Performance/Sum: # (new in 1.8)
+  Enabled: true
