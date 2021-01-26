@@ -1,15 +1,20 @@
-require 'ginseng'
-require 'active_support/dependencies/autoload'
+require 'bundler/setup'
 
 module Ginseng
   module Postgres
-    extend ActiveSupport::Autoload
+    def self.dir
+      return File.expand_path('../..', __dir__)
+    end
 
-    autoload :Config
-    autoload :Database
-    autoload :DSN
-    autoload :Environment
-    autoload :Package
-    autoload :QueryTemplate
+    def self.loader
+      config = YAML.load_file(File.join(dir, 'config/autoload.yaml'))
+      loader = Zeitwerk::Loader.new
+      loader.inflector.inflect(config['inflections'])
+      loader.push_dir(File.join(dir, 'lib/ginseng/postgres'), namespace: Ginseng::Postgres)
+      return loader
+    end
   end
 end
+
+Bundler.require
+Ginseng::Postgres.loader.setup
