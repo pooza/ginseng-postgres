@@ -2,7 +2,6 @@ dir = File.expand_path(__dir__)
 $LOAD_PATH.unshift(File.join(dir, 'lib'))
 ENV['BUNDLE_GEMFILE'] ||= File.join(dir, 'Gemfile')
 
-require 'bundler/setup'
 require 'ginseng'
 require 'ginseng/postgres'
 
@@ -23,9 +22,5 @@ end
 
 desc 'test all'
 task :test do
-  ENV['TEST'] = Ginseng::Postgres::Package.name
-  require 'test/unit'
-  Dir.glob(File.join(Ginseng::Postgres::Environment.dir, 'test/*.rb')).sort.each do |t|
-    require t
-  end
+  Ginseng::Postgres::TestCase.load
 end
