@@ -1,6 +1,5 @@
 require 'sequel'
 require 'pg'
-require 'erb'
 require 'singleton'
 
 module Ginseng
@@ -12,6 +11,7 @@ module Ginseng
 
       def initialize
         @config = config_class.instance
+        @logger = logger_class.new
         dsn = database_class.dsn
         raise Ginseng::DatabaseError, 'Invalid DSN' unless dsn.valid?
         @connection = Sequel.connect(dsn.to_s)
@@ -30,7 +30,11 @@ module Ginseng
       end
 
       def execute(name, params = {})
-        return @connection.fetch(create_sql(name, params)).all.map(&:with_indifferent_access)
+        start = Time.now
+        sql = create_sql(name, params)
+        rows = @connection.fetch(sql).all.map(&:with_indifferent_access)
+        @logger.info(sql: sql, rows: rows.count, seconds: Time.now - start)
+        return rows
       rescue => e
         raise Ginseng::DatabaseError, e.message, e.backtrace
       end
