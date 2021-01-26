@@ -1,28 +1,28 @@
 module Ginseng
   module Postgres
     module Package
-      def module_name
-        return 'Ginseng::Postgres'
-      end
-
       def environment_class
-        return "#{module_name}::Environment".constantize
+        return Environment
       end
 
       def package_class
-        return "#{module_name}::Package".constantize
+        return Package
       end
 
       def config_class
-        return "#{module_name}::Config".constantize
+        return Config
+      end
+
+      def logger_class
+        return Logger
       end
 
       def database_class
-        return "#{module_name}::Database".constantize
+        return Database
       end
 
       def query_template_class
-        return "#{module_name}::QueryTemplate".constantize
+        return QueryTemplate
       end
 
       def self.name
