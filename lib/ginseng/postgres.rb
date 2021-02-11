@@ -10,11 +10,11 @@ module Ginseng
       config = YAML.load_file(File.join(dir, 'config/autoload.yaml'))
       loader = Zeitwerk::Loader.new
       loader.inflector.inflect(config['inflections'])
-      loader.push_dir(File.join(dir, 'lib/ginseng/postgres'), namespace: Ginseng::Postgres)
+      loader.push_dir(File.join(dir, 'lib/ginseng/postgres'), namespace: Ginseng::Web)
       return loader
     end
+
+    Bundler.require
+    loader.setup
   end
 end
-
-Bundler.require
-Ginseng::Postgres.loader.setup
