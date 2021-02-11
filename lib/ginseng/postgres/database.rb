@@ -51,7 +51,7 @@ module Ginseng
       alias exec execute
 
       def loggable?
-        return Environment.test?
+        return environment_class.test?
       end
 
       def slow?(seconds)
