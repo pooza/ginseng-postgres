@@ -1,5 +1,5 @@
 package:
-  version: 1.3.1
+  version: 1.3.2
   url: https://github.com/pooza/ginseng-postgres
   authors:
     - Tatsuya Koishi
@@ -7,7 +7,5 @@ package:
     - tkoishi@b-shock.co.jp
   description: ginseng PostgreSQL libraries
   license: MIT
-test:
-  filters: []
 postgres:
   dsn: postgres://postgres:password@localhost:5432/test
