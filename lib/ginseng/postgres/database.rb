@@ -1,5 +1,6 @@
 require 'sequel'
 require 'pg'
+require 'facets/time'
 require 'singleton'
 
 module Ginseng
@@ -34,10 +35,13 @@ module Ginseng
       end
 
       def execute(name, params = {})
-        start = Time.now
-        sql = create_sql(name, params)
-        rows = @connection.fetch(sql).all.map(&:with_indifferent_access)
-        @logger.info(sql: sql, rows: rows.count, seconds: Time.now - start) if loggable?
+        rows = nil
+        sql = nil
+        secs = Time.elapse do
+          sql = create_sql(name, params)
+          rows = @connection.fetch(sql).all.map(&:with_indifferent_access)
+        end
+        @logger.info(sql: sql, rows: rows.count, seconds: secs.round(3)) if loggable? || slow?(secs)
         return rows
       rescue => e
         @logger.error(error: e, sql: sql)
@@ -48,6 +52,10 @@ module Ginseng
 
       def loggable?
         return Environment.test?
+      end
+
+      def slow?(seconds)
+        return @config['/postgres/slow_query/seconds'] < seconds
       end
 
       def self.dsn

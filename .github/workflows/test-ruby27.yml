@@ -2,9 +2,9 @@ name: test
 on:
   - push
 env:
-  CI: "true"
+  CI: 'true'
 jobs:
-  test:
+  test-ruby27:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -20,13 +20,14 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.0
+          ruby-version: 2.7.2
       - name: apt install
         run: |
           sudo apt update
           sudo apt install libpq-dev
       - name: bundle install
         run: |
+          gem install bundler -v '~>2.1.0'
           bundle install --jobs 4 --retry 3
           bundle exec rake bundle:update
           bundle exec rake bundle:check
