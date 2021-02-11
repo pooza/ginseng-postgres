@@ -9,3 +9,5 @@ package:
   license: MIT
 postgres:
   dsn: postgres://postgres:password@localhost:5432/test
+  slow_query:
+    seconds: 5
