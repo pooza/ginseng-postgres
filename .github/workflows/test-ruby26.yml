@@ -2,9 +2,9 @@ name: test
 on:
   - push
 env:
-  CI: "true"
+  CI: 'true'
 jobs:
-  test:
+  test-ruby26:
     runs-on: ubuntu-latest
     services:
       postgres:
