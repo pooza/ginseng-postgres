@@ -6,16 +6,9 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: ${{ matrix.ruby }}
-    strategy:
-      matrix:
-        ruby:
-          - ruby:2.6
-          - ruby:2.7
-          - ruby:3.0
     services:
       postgres:
-        image: postgres:13
+        image: postgres:12
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
@@ -25,6 +18,9 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.0
       - name: apt install
         run: |
           sudo apt update
