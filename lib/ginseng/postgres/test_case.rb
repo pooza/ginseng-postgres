@@ -6,7 +6,7 @@ module Ginseng
       def self.load
         ENV['TEST'] = Package.name
         names.each do |name|
-          puts "case: #{name}"
+          puts "+ case: #{name}" if Environment.test?
           require File.join(dir, "#{name}.rb")
         end
       end
@@ -20,7 +20,8 @@ module Ginseng
           end
         end
         names ||= Dir.glob(File.join(dir, '*.rb')).map {|v| File.basename(v, '.rb')}
-        TestCaseFilter.all.select(&:active?).each do |filter|
+        TestCaseFilter.all do |filter|
+          next unless filter.active?
           puts "filter: #{filter.class}" if Environment.test?
           filter.exec(names)
         end
