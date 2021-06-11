@@ -13,7 +13,7 @@ module Ginseng
             'pg_dump',
             '--exclude-schema', 'repack',
             '--host', @dsn.host || 'localhost',
-            '--port', @dsn.port.to_s || '5432',
+            '--port', @dsn.port || 5432,
             '--username', @dsn.user || 'postgres',
             '--dbname', @dsn.dbname
           ])
