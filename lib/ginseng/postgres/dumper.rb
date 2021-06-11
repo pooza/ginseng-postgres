@@ -1,21 +1,28 @@
 module Ginseng
   module Postgres
     class Dumper
-      attr_accessor :dsn, :dest
+      attr_reader :dsn
+      attr_accessor :dest
 
       def initialize(params = {})
-        @dsn = Database.dsn
+        dsn = Database.dsn
+      end
+
+      def dsn=(dsn)
+        @dsn = dsn
+        @command = nil
+        @dump = nil
       end
 
       def command
         unless @command
           @command ||= CommandLine.new([
             'pg_dump',
-            '--exclude-schema', 'repack',
             '--host', @dsn.host || 'localhost',
             '--port', @dsn.port || 5432,
             '--username', @dsn.user || 'postgres',
-            '--dbname', @dsn.dbname
+            '--dbname', @dsn.dbname,
+            '--exclude-schema', 'repack'
           ])
           @command.env = {'PGPASSWORD' => @dsn.password} if @dsn.password
         end
