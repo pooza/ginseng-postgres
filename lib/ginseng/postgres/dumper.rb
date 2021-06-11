@@ -12,12 +12,12 @@ module Ginseng
           @command ||= CommandLine.new([
             'pg_dump',
             '--exclude-schema', 'repack',
-            '--host', @dsn.host,
-            '--port', @dsn.port.to_s,
-            '--username', @dsn.user,
+            '--host', @dsn.host || 'localhost',
+            '--port', @dsn.port.to_s || '5432',
+            '--username', @dsn.user || 'postgres',
             '--dbname', @dsn.dbname
           ])
-          @command.env = {'PGPASSWORD' => @dsn.password}
+          @command.env = {'PGPASSWORD' => @dsn.password} if @dsn.password
         end
         return @command
       end
