@@ -15,7 +15,6 @@ module Ginseng
     end
 
     def self.setup_debug
-      require 'ricecream'
       Ricecream.disable
       return unless Environment.development?
       Ricecream.enable
