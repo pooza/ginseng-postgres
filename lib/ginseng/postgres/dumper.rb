@@ -22,14 +22,14 @@ module Ginseng
         unless @command
           @command ||= CommandLine.new([
             'pg_dump',
-            '--host', @dsn.host || 'localhost',
-            '--port', @dsn.port || 5432,
-            '--username', @dsn.user || 'postgres',
-            '--dbname', @dsn.dbname,
+            '--host', dsn.host || 'localhost',
+            '--port', dsn.port || 5432,
+            '--username', dsn.user || 'postgres',
+            '--dbname', dsn.dbname,
             '--file', dest
           ])
           @command.args.concat(extra_args)
-          @command.env = {'PGPASSWORD' => @dsn.password} if @dsn.password
+          @command.env = {'PGPASSWORD' => dsn.password} if dsn.password
         end
         return @command
       end
@@ -40,9 +40,9 @@ module Ginseng
       end
 
       def compress
-        save unless File.exist?(dest)
+        exec unless File.exist?(dest)
         Ginseng::Gzip.compress(dest)
-        @dest = "#{@dest}.gz"
+        @dest = "#{dest}.gz"
       end
 
       private
