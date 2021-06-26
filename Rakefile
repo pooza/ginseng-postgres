@@ -21,7 +21,7 @@ end
 
 desc 'test all'
 task test: ['tmp:cache:clean'] do
-  Ginseng::Postgres::TestCase.load
+  Ginseng::Postgres::TestCase.load((ARGV.first&.split(/[^[:word:],]+/) || [])[1])
 end
 
 namespace :tmp do
