@@ -16,6 +16,7 @@ module Ginseng
         dsn = database_class.dsn
         raise Ginseng::DatabaseError, 'Invalid DSN' unless dsn.valid?
         @connection = Sequel.connect(dsn.to_s)
+        @connection.convert_infinite_timestamps = :nil
       rescue => e
         @logger.error(error: e)
         raise Ginseng::DatabaseError, e.message, e.backtrace
