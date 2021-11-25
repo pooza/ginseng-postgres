@@ -9,6 +9,10 @@ module Ginseng
         assert(@db.connection.is_a?(Sequel::Database))
       end
 
+      def test_convert_infinite_timestamps
+        assert_equal(@db.connection.convert_infinite_timestamps, :nil)
+      end
+
       def test_escape_string
         assert_equal(@db.escape_string('あえ'), 'あえ')
         assert_equal(@db.escape_string(%(あえ")), %(あえ\"))
