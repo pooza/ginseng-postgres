@@ -18,7 +18,7 @@ AllCops:
     - 'config/**/*'
     - 'tmp/**/*'
     - '**/old/**/*'
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.0
 
 Naming/RescuedExceptionsVariableName:
   PreferredName: e
