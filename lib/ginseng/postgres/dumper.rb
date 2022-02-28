@@ -41,7 +41,7 @@ module Ginseng
 
       def compress
         exec unless File.exist?(dest)
-        Ginseng::Gzip.compress(dest)
+        Gzip.compress(dest)
         @dest = "#{dest}.gz"
       end
 

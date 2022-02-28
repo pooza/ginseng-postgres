@@ -14,12 +14,12 @@ module Ginseng
         @config = config_class.instance
         @logger = logger_class.new
         dsn = database_class.dsn
-        raise Ginseng::DatabaseError, 'Invalid DSN' unless dsn.valid?
+        raise DatabaseError, 'Invalid DSN' unless dsn.valid?
         @connection = Sequel.connect(dsn.to_s)
         @connection.convert_infinite_timestamps = :nil
       rescue => e
         @logger.error(error: e)
-        raise Ginseng::DatabaseError, e.message, e.backtrace
+        raise DatabaseError, e.message, e.backtrace
       end
 
       def escape_string(value)
@@ -32,7 +32,7 @@ module Ginseng
         return template.to_s
       rescue => e
         @logger.error(error: e, name: name, params: params)
-        raise Ginseng::DatabaseError, e.message, e.backtrace
+        raise DatabaseError, e.message, e.backtrace
       end
 
       def execute(name, params = {})
@@ -46,7 +46,7 @@ module Ginseng
         return rows
       rescue => e
         @logger.error(error: e, sql: sql)
-        raise Ginseng::DatabaseError, e.message, e.backtrace
+        raise DatabaseError, e.message, e.backtrace
       end
 
       alias exec execute
@@ -61,7 +61,7 @@ module Ginseng
 
       def self.dsn
         return DSN.parse(Config.instance['/postgres/dsn'])
-      rescue Ginseng::ConfigError
+      rescue ConfigError
         return nil
       end
 
