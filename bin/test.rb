@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(File.join(File.expand_path('..', __dir__), 'lib'))
 require 'ginseng/postgres'
 module Ginseng
   module Postgres
-    warn Package.full_name
+    warn Package.name
     warn File.basename(__FILE__)
     warn ''
     TestCase.load(ARGV.getopts('', 'cases:')['cases'] || ARGV.first)

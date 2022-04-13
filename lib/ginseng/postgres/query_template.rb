@@ -21,7 +21,7 @@ module Ginseng
       end
 
       def to_s
-        return super.gsub(/[[:blank:]]+/, ' ').strip
+        return super.gsub(/\s+/, ' ').strip
       end
 
       private
