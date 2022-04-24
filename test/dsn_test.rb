@@ -6,7 +6,7 @@ module Ginseng
       end
 
       def test_new
-        assert(@dsn.is_a?(DSN))
+        assert_kind_of(DSN, @dsn)
       end
 
       def test_scheme

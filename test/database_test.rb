@@ -6,7 +6,7 @@ module Ginseng
       end
 
       def test_connection
-        assert(@db.connection.is_a?(Sequel::Database))
+        assert_kind_of(Sequel::Database, @db.connection)
       end
 
       def test_convert_infinite_timestamps
@@ -22,7 +22,7 @@ module Ginseng
       def test_execute
         assert(@db.execute('tables', {schema: 'information_schema'}).present?)
         @db.execute('tables', {schema: 'information_schema'}).each do |row|
-          assert(row.is_a?(Hash))
+          assert_kind_of(Hash, row)
         end
       end
     end
