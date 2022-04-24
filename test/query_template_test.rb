@@ -2,11 +2,11 @@ module Ginseng
   module Postgres
     class QueryTemplateTest < Test::Unit::TestCase
       def setup
-        @template = QueryTemplate.new('tables')
+        @template = QueryTemplate.new(:tables)
       end
 
       def test_new
-        assert(@template.is_a?(QueryTemplate))
+        assert_kind_of(QueryTemplate, @template)
       end
 
       def test_param
