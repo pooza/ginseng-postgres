@@ -11,11 +11,11 @@ module Ginseng
 
       def to_h
         return {
-          host: host,
-          user: user,
-          password: password,
-          dbname: dbname,
-          port: port,
+          host:,
+          user:,
+          password:,
+          dbname:,
+          port:,
         }
       end
     end

@@ -31,7 +31,7 @@ module Ginseng
         template.params = params
         return template.to_s
       rescue => e
-        @logger.error(error: e, name: name, params: params)
+        @logger.error(error: e, name:, params:)
         raise DatabaseError, e.message, e.backtrace
       end
 
@@ -42,10 +42,10 @@ module Ginseng
           sql = create_sql(name, params)
           rows = @connection.fetch(sql).all.map(&:with_indifferent_access)
         end
-        @logger.info(sql: sql, rows: rows.count, seconds: secs.round(3)) if loggable? || slow?(secs)
+        @logger.info(sql:, rows: rows.count, seconds: secs.round(3)) if loggable? || slow?(secs)
         return rows
       rescue => e
-        @logger.error(error: e, sql: sql)
+        @logger.error(error: e, sql:)
         raise DatabaseError, e.message, e.backtrace
       end
 
