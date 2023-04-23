@@ -10,17 +10,17 @@ module Ginseng
       end
 
       def test_convert_infinite_timestamps
-        assert_equal(@db.connection.convert_infinite_timestamps, :nil)
+        assert_equal(:nil, @db.connection.convert_infinite_timestamps)
       end
 
       def test_escape_string
-        assert_equal(@db.escape_string('あえ'), 'あえ')
-        assert_equal(@db.escape_string(%(あえ")), %(あえ\"))
-        assert_equal(@db.escape_string(%(あえ')), %(あえ''))
+        assert_equal('あえ', @db.escape_string('あえ'))
+        assert_equal(%(あえ"), @db.escape_string(%(あえ")))
+        assert_equal(%(あえ''), @db.escape_string(%(あえ')))
       end
 
       def test_execute
-        assert(@db.execute('tables', {schema: 'information_schema'}).present?)
+        assert_predicate(@db.execute('tables', {schema: 'information_schema'}), :present?)
         @db.execute('tables', {schema: 'information_schema'}).each do |row|
           assert_kind_of(Hash, row)
         end
