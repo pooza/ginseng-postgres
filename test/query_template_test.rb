@@ -27,6 +27,12 @@ module Ginseng
         @template.params = {schema: 'information_schema'}
         assert_equal(@template.to_s, %(SELECT * FROM information_schema.tables WHERE table_schema='information_schema'))
       end
+
+      def test_escape
+        assert_equal("test", @template.escape("test"))
+        assert_equal("O''Reilly", @template.escape("O'Reilly"))
+        assert_equal("100%", @template.escape("100%"))
+      end
     end
   end
 end

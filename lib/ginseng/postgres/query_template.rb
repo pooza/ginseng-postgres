@@ -21,6 +21,10 @@ module Ginseng
         super
       end
 
+      def escape(value)
+        return db.escape_string(value.to_s)
+      end
+
       def to_s
         return super.gsub(/\s+/, ' ').strip
       end
