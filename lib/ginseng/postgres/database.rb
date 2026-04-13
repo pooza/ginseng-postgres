@@ -8,6 +8,7 @@ module Ginseng
     class Database
       include Singleton
       include Package
+
       attr_reader :connection
 
       def initialize
@@ -15,7 +16,11 @@ module Ginseng
         @logger = logger_class.new
         dsn = database_class.dsn
         raise DatabaseError, 'Invalid DSN' unless dsn.valid?
-        @connection = Sequel.connect(dsn.to_s)
+        @connection = Sequel.connect(
+          dsn.to_s,
+          max_connections: (@config['/postgres/pool/size'] rescue 4),
+          pool_timeout: (@config['/postgres/pool/timeout'] rescue 5),
+        )
         @connection.convert_infinite_timestamps = :nil
       rescue => e
         @logger.error(error: e)
