@@ -29,9 +29,9 @@ module Ginseng
       end
 
       def test_escape
-        assert_equal("test", @template.escape("test"))
+        assert_equal('test', @template.escape('test'))
         assert_equal("O''Reilly", @template.escape("O'Reilly"))
-        assert_equal("100%", @template.escape("100%"))
+        assert_equal('100%', @template.escape('100%'))
       end
     end
   end

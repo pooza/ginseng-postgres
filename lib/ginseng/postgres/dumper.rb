@@ -2,6 +2,7 @@ module Ginseng
   module Postgres
     class Dumper
       include Package
+
       attr_reader :dsn, :extra_args
       attr_accessor :dest
 
