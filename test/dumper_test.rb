@@ -20,8 +20,10 @@ module Ginseng
 
       def test_exec
         @dumper.exec
+
         assert(File.exist?(@dumper.dest))
         @dumper.compress
+
         assert(File.exist?(@dumper.dest))
         assert(@dumper.dest.end_with?('.gz'))
       end
