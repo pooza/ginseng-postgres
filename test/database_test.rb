@@ -15,7 +15,7 @@ module Ginseng
 
       def test_escape_string
         assert_equal(@db.escape_string('あえ'), 'あえ')
-        assert_equal(@db.escape_string(%(あえ")), %(あえ\"))
+        assert_equal(@db.escape_string(%(あえ")), %(あえ"))
         assert_equal(@db.escape_string(%(あえ')), %(あえ''))
       end
 

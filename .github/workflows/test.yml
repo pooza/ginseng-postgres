@@ -1,0 +1,44 @@
+name: test
+on:
+  push:
+  # ⚠ push 契機だけだと、更新が止まったときに赤へ気づけない。
+  # このリポジトリの CI は 2026-04-13 から 4 ヶ月赤のまま誰も気づかなかった。
+  schedule:
+    - cron: '25 0 * * 1'
+env:
+  CI: 'true'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby:
+          - '3.3'
+          - '3.4'
+          - '4.0'
+    # ⚠ services は gem ごとに違うので呼び出し側に残す。
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v5
+      # ⚠⚠ 他の gem のように container: ruby:X へ寄せていないのは、container
+      # ジョブだと service のホスト名が localhost ではなくサービス名になり、
+      # config/lib.yaml の DSN（postgres://...@localhost:5432/test）と食い違うため。
+      # ランナー実行なら ports のマッピングで localhost のまま届く。
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - name: apt install
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libpq-dev
+      # ⚠ 手順の正本は pooza/ginseng-style。
+      - uses: pooza/ginseng-style/.github/actions/ruby-check@main
