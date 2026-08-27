@@ -51,4 +51,4 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libpq-dev
       # ⚠ 手順の正本は pooza/ginseng-style。
-      - uses: pooza/ginseng-style/.github/actions/ruby-check@v1.1.4
+      - uses: pooza/ginseng-style/.github/actions/ruby-check@dcd530d88b613ed67e908822da428710bd8351ad # v1.1.8
