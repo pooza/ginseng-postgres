@@ -57,6 +57,10 @@ module Ginseng
         assert_include(first, "table_schema='O''Reilly'")
       end
 
+      def test_params_rejects_nil
+        assert_raise(NoMethodError) {@template.params = nil}
+      end
+
       def test_escape
         assert_equal('test', @template.escape('test'))
         assert_equal("O''Reilly", @template.escape("O'Reilly"))
