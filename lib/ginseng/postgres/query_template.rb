@@ -10,12 +10,11 @@ module Ginseng
         super
       end
 
-      # ginseng-upstream: no — 値を SQL 向けにエスケープするのは SQL の事情（⚠ 引数を書き換える不具合は #118）
+      # ginseng-upstream: no — 値を SQL 向けにエスケープするのは SQL の事情
+      # ⚠ 引数には書き戻さない（#118）。書き戻すと呼び出し側の Hash が変わり、同じ Hash を
+      # もう一度渡したときに二重にエスケープされる。凍結した Hash も渡せなくなる。
       def params=(params)
-        params.select {|_, v| v.is_a?(String)}.each do |k, v|
-          params[k] = db.escape_string(v)
-        end
-        super
+        super(params.to_h.transform_values {|v| v.is_a?(String) ? db.escape_string(v) : v})
       end
 
       # ginseng-upstream: no — 値を SQL 向けにエスケープするのは SQL の事情
