@@ -14,7 +14,7 @@ module Ginseng
       # ⚠ 引数には書き戻さない（#118）。書き戻すと呼び出し側の Hash が変わり、同じ Hash を
       # もう一度渡したときに二重にエスケープされる。凍結した Hash も渡せなくなる。
       def params=(params)
-        super(params.to_h.transform_values {|v| v.is_a?(String) ? db.escape_string(v) : v})
+        super(params.transform_values {|v| v.is_a?(String) ? db.escape_string(v) : v})
       end
 
       # ginseng-upstream: no — 値を SQL 向けにエスケープするのは SQL の事情
@@ -27,7 +27,7 @@ module Ginseng
         return db.escape_string(value.to_s)
       end
 
-      # ginseng-upstream: no — 空白を詰めるのは SQL を 1 行にするため
+      # ginseng-upstream: no — 空白を詰めてよいのは SQL だから（HTML などでは空白に意味があり、詰めると壊れる）
       def to_s
         return super.gsub(/\s+/, ' ').strip
       end
